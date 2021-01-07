@@ -1,0 +1,22 @@
+server:
+  port: 3000
+
+spring:
+  application:
+    name: atguigu-crowd-redis
+  redis:
+    host: localhost
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+
+
+logging:
+  level:
+    com.atguigu.crowd.mapper: debug
+    com.atguigu.crowd.test: debug
+
+mybatis:
+  mapper-locations: classpath:/mybatis/mapper/*Mapper.xml

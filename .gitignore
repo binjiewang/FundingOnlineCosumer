@@ -1,0 +1,4 @@
+# Project exclude paths
+/atcrowdfunding07memberparent/atcrowdfunding08-member-eureka/target/
+/atcrowdfunding07memberparent/atcrowdfunding09-member-entity/target/
+/atcrowdfunding07memberparent/atcrowdfunding10-member-mysql-provider/target/
