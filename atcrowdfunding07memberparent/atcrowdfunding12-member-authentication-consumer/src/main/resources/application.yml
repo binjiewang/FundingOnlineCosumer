@@ -6,8 +6,16 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
-
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:1000/eureka
+
+#短信配置
+short:
+  message:
+    context: 注册验证码
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
