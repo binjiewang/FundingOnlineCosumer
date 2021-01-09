@@ -1,10 +1,14 @@
 package com.atguigu.crowd.handler;
 
+import com.atguigu.crowd.constant.CrowdConstant;
 import com.atguigu.crowd.entity.po.MemberPO;
 import com.atguigu.crowd.service.api.MemberService;
 import com.atguigu.crowd.util.ResultEntity;
-import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,4 +29,18 @@ public class MemberProviderHandler {
             return ResultEntity.failed(e.getMessage());
         }
     };
+
+    @RequestMapping("/save/member/remote")
+    public ResultEntity<String> saveMember(@RequestBody MemberPO memberPO){
+        try {
+            memberService.saveMember(memberPO);
+            return ResultEntity.successWithoutData();
+        }catch (Exception e){
+            if(e instanceof DuplicateKeyException){
+                return ResultEntity.failed(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
+            }
+            return ResultEntity.failed(e.getMessage());
+        }
+    }
+
 }

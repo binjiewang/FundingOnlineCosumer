@@ -10,8 +10,6 @@ public class PortalHandler {
     @RequestMapping("/")
     public String showPortalPage() {
         // 实际开发为加载数据，加载数据省略
-        CrowdUtil.sendShortMessage("133856030853","xx");
-
         return "portal";
     }
 }

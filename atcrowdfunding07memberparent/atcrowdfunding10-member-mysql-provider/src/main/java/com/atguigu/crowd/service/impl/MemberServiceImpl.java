@@ -6,6 +6,7 @@ import com.atguigu.crowd.mapper.MemberPOMapper;
 import com.atguigu.crowd.service.api.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -16,12 +17,16 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberPOMapper memberPOMapper;
 
-    @Override
     public MemberPO getMemberPOByLoginAcct(String loginacct) {
         MemberPOExample example = new MemberPOExample();
         MemberPOExample.Criteria criteria = example.createCriteria();
         criteria.andLoginacctEqualTo(loginacct);
         List<MemberPO> memberPOList = memberPOMapper.selectByExample(example);
-        return memberPOList.get(0);
+        return (memberPOList==null||memberPOList.size()==0)?null:memberPOList.get(0);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = Exception.class)
+    public void saveMember(MemberPO memberPO) {
+        memberPOMapper.insert(memberPO);
     }
 }
