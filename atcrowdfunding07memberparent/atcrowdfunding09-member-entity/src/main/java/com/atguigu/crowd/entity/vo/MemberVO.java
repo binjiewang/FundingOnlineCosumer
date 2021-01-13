@@ -1,6 +1,8 @@
 package com.atguigu.crowd.entity.vo;
 
-public class MemberVO {
+import java.io.Serializable;
+
+public class MemberVO implements Serializable {
     private String loginacct;
 
     private String userpswd;

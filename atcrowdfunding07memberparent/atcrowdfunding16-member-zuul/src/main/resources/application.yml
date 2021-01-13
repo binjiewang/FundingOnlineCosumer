@@ -3,6 +3,10 @@ server:
 spring:
   application:
     name: atguigu-crowd-zuul
+  session:
+    store-type: redis
+  redis:
+    host: localhost
 
 eureka:
   client:

@@ -45,18 +45,18 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-util</artifactId>
         </dependency>-->
-<!--
-        &lt;!&ndash; 引入springboot&redis整合场景 &ndash;&gt;
+
+        <!-- 引入springboot&redis整合场景 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        &lt;!&ndash; 引入springboot&springsession整合场景 &ndash;&gt;
+        <!-- 引入springboot&springsession整合场景 -->
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
-        </dependency>-->
+        </dependency>
 
     </dependencies>
 
