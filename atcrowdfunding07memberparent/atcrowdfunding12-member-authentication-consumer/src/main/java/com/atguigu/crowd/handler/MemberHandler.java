@@ -96,7 +96,7 @@ public class MemberHandler {
             return "member-reg";
         }
 
-        return "redirect:/auth/member/to/login/page";
+        return "redirect:http://www.binjiewang.com/auth/member/to/login/page";
     }
 
     /**
@@ -143,6 +143,6 @@ public class MemberHandler {
     @RequestMapping("/auth/member/logout")
     public String doLogout(HttpSession httpSession){
         httpSession.invalidate();
-        return "redirect:/";
+        return "redirect:http://www.binjiewang.com/";
     }
 }
