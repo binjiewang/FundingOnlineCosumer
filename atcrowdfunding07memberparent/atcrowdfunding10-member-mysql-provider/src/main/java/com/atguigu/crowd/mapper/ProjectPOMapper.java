@@ -2,6 +2,7 @@ package com.atguigu.crowd.mapper;
 
 import com.atguigu.crowd.entity.po.ProjectPO;
 import com.atguigu.crowd.entity.po.ProjectPOExample;
+import com.atguigu.crowd.entity.vo.PortalTypeVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -32,4 +33,6 @@ public interface ProjectPOMapper {
     void insertTypeRelationship(@Param("projectPOId") Integer projectPOId, @Param("typeId")Integer typeId);
 
     void insertTagRelationship(@Param("projectPOId") Integer projectPOId, @Param("tagId")Integer typeId);
+
+    List<PortalTypeVO> selectPortalTypeVOList();
 }

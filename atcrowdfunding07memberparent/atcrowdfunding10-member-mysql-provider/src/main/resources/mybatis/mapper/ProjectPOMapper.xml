@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.atguigu.crowd.mapper.ProjectPOMapper">
+    <!--自定义-->
+    <resultMap id="portalList" type="com.atguigu.crowd.entity.vo.PortalTypeVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="remark" property="remark"/>
+        <collection property="portalProjectVOList" column="id" select="selectPortalProjectVOList"
+                    ofType="com.atguigu.crowd.entity.vo.PortalProjectVO"/>
+    </resultMap>
+
+    <select id="selectPortalTypeVOList" resultMap="portalList">
+        select id, name, remark
+        from t_type
+    </select>
+
+    <select id="selectPortalProjectVOList" resultType="com.atguigu.crowd.entity.vo.PortalProjectVO">
+        SELECT t_project.id projectId,
+               project_name projectName,
+               money,
+               deploydate deployDate,
+               supportmoney/money*100 percentage,
+               supporter supporter,
+               header_picture_path headerPicturePath
+        FROM t_project LEFT JOIN t_project_type ON t_project.id=t_project_type.projectid
+        WHERE t_project_type.typeid=#{id}
+        ORDER BY t_project.id DESC
+            LIMIT 0,4
+    </select>
+
     <resultMap id="BaseResultMap" type="com.atguigu.crowd.entity.po.ProjectPO">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
@@ -116,10 +144,18 @@
 
     <!--自定义-->
     <insert id="insertTypeRelationship">
-        INSERT t_project_type(projectid,typeid) VALUES (#{projectPOId},#{typeId})
+        INSERT
+        t_project_type(projectid,typeid) VALUES (
+        #{projectPOId},
+        #{typeId}
+        )
     </insert>
     <insert id="insertTagRelationship">
-        INSERT t_project_tag(projectid,tagid) VALUES (#{projectPOId},#{tagId});
+        INSERT
+        t_project_tag(projectid,tagid) VALUES (
+        #{projectPOId},
+        #{tagId}
+        );
     </insert>
 
     <insert id="insert" parameterType="com.atguigu.crowd.entity.po.ProjectPO">
