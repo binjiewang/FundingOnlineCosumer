@@ -28,4 +28,8 @@ public interface ProjectPOMapper {
     int updateByPrimaryKeySelective(ProjectPO record);
 
     int updateByPrimaryKey(ProjectPO record);
+
+    void insertTypeRelationship(@Param("projectPOId") Integer projectPOId, @Param("typeId")Integer typeId);
+
+    void insertTagRelationship(@Param("projectPOId") Integer projectPOId, @Param("tagId")Integer typeId);
 }

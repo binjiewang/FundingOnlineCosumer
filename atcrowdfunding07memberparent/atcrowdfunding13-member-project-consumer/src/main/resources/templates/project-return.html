@@ -11,6 +11,8 @@
 <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"
 	href="css/font-awesome.min.css">
 <link rel="stylesheet" th:href="@{/css/theme.css}" href="css/theme.css">
+<script type="text/javascript" th:src="@{/jquery/jquery-2.1.1.min.js}" src="jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" th:src="@{/layer2/layer.js}" rc="layer2/layer.js"></script>
 <style>
 #footer {
 	padding: 15px 0;
@@ -462,7 +464,7 @@
 			
 			// 发送Ajax请求上传文件
 			$.ajax({
-				"url":"[[@{/project/create/upload/return/picture.json}]]",
+				"url":"/project/create/upload/return/picture.json",
 				"type":"post",
 				"data":formData,
 				"contentType":false,
@@ -473,8 +475,8 @@
 					var result = response.result;
 					
 					if(result == "SUCCESS") {
-						alert("上传成功！");
-						
+						layer.msg("上传成功！");
+						// alert("上传成功！");
 						// 如果上传成功，则从响应体数据中获取图片的访问路径
 						returnObj.describPicPath = response.data;
 					}
@@ -507,18 +509,18 @@
 			returnObj.freight = $("[name=freight]").val();
 			returnObj.invoice = $("[name=invoice]:checked").val();
 			returnObj.returndate = $("[name=returndate]").val();
-			
+
+			debugger;
 			// 2.发送Ajax请求
 			$.ajax({
-				"url" : "[[@{/project/create/save/return.json}]]",
+				"url" : "/project/create/save/return.json",
 				"type": "post",
 				"dataType": "json",
 				"data": returnObj,
 				"success": function(response) {
 					var result = response.result;
 					if(result == "SUCCESS") {
-						alert("这一条保存成功！");
-						
+						layer.msg("该条回报保存成功！");
 						// 使用returnObj填充表格
 						var orderTd = "<td>"+(++order)+"</td>";
 						var supportmoneyTd = "<td>"+returnObj.supportmoney+"</td>";
@@ -536,7 +538,7 @@
 					}
 					
 					if(result == "FAILED") {
-						alert("这一条保存失败！");
+						layer.msg("这一条保存失败！");
 					}
 					
 					// 后续操作

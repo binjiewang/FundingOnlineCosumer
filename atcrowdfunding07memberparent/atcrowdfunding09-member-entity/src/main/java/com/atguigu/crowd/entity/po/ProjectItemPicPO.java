@@ -7,6 +7,15 @@ public class ProjectItemPicPO {
 
     private String itemPicPath;
 
+    public ProjectItemPicPO() {
+    }
+
+    public ProjectItemPicPO(Integer id, Integer projectid, String itemPicPath) {
+        this.id = id;
+        this.projectid = projectid;
+        this.itemPicPath = itemPicPath;
+    }
+
     public Integer getId() {
         return id;
     }
